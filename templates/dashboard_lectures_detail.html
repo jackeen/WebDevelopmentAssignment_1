@@ -1,0 +1,22 @@
+{% extends 'dashboard_frame.html' %}
+
+{% block title %}
+    {{ lecture.user.first_name }} detail | Attendance
+{% endblock %}
+
+{% block content %}
+    <div class="bg-dark-subtle p-3">
+        <h5 class="pb-3">Staff ID: {{ lecture.staff_id }}</h5>
+        
+        <h6>Personal Information</h6>
+        <ul>
+            <li>User Name: {{ lecture.user.username }}</li>
+            <li>Full Name: {{ lecture.user.first_name }} {{ lecture.user.last_name }}</li>
+            <li>Email: {{ lecture.user.email }}</li>
+        </ul>
+    
+        
+    
+        
+    </div>
+{% endblock %}
