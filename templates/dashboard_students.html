@@ -1,0 +1,13 @@
+{% extends 'dashboard_frame.html' %}
+
+{% block title %}
+    Students | Attendance
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-end pb-3 gap-3">
+        <a class="btn btn-secondary" href="">Upload Students</a>
+        <a class="btn btn-primary" href="{% url 'dashboard_students_create' %}">Add New Student</a>
+    </div>
+    {% include 'student_list_segment.html' with students=students %}
+{% endblock %}

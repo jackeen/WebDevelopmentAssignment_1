@@ -1,0 +1,29 @@
+{% extends 'dashboard_frame.html' %}
+
+{% block title %}
+    {{ student.user.first_name }} detail | Attendance
+{% endblock %}
+
+{% block content %}
+    <div class="bg-dark-subtle p-3">
+        <h5 class="pb-3">Student ID: {{ student.student_id }}</h5>
+        
+        <h6>Personal Information</h6>
+        <ul>
+            <li>User Name: {{ student.user.username }}</li>
+            <li>Full Name: {{ student.user.first_name }} {{ student.user.last_name }}</li>
+            <li>Email: {{ student.user.email }}</li>
+        </ul>
+    
+        <h6>Enrolled Classes</h6>
+        {% if student.classes.count > 0 %}
+        <ul>
+        {% for cla in student.classes %}
+            <li>{{ cla.number }}, {{ cla.course }}</li>
+        {% endfor %}
+        </ul>
+        {% endif %} 
+    
+        
+    </div>
+{% endblock %}

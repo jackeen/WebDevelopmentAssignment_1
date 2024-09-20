@@ -1,0 +1,47 @@
+{% extends 'dashboard_frame.html' %}
+
+{% block title %}
+    Create Student | Attendance
+{% endblock %}
+
+{% block content %}
+    <div class="bg-dark-subtle p-3">
+        <h5 class="pb-3">Create new student</h5>
+        <form method="post" action="{% url 'dashboard_students_create' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="student_id" class="form-label">Student ID</label>
+                <input type="text" class="form-control" name="student_id" id="student_id">
+            </div>
+            
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" id="email">
+            </div>
+            
+            <div class="mb-3">
+                <label for="date_of_birth" class="form-label">User name</label>
+                <input type="date" class="form-control" name="date_of_birth" id="date_of_birth">
+            </div>
+            
+            <div class="mb-3">
+                <label for="first_name" class="form-label">First name</label>
+                <input type="text" class="form-control" name="first_name" id="first_name">
+            </div>
+            
+            <div class="mb-3">
+                <label for="last_name" class="form-label">Last name</label>
+                <input type="text" class="form-control" name="last_name" id="last_name">
+            </div>
+            
+            <div class="mb-3">
+                <label for="user_name" class="form-label">User name</label>
+                <input type="text" class="form-control" name="user_name" id="user_name">
+            </div>
+            
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        
+    </div>
+{% endblock %}
