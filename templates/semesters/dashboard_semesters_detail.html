@@ -1,0 +1,23 @@
+{% extends 'dashboard_frame.html' %}
+
+{% block title %}
+    {{ semester.year }} {{ semester.semester }} detail | Attendance
+{% endblock %}
+
+{% block content %}
+    <div class="bg-dark-subtle p-3">
+        <h5 class="pb-3">{{ semester.year }} {{ semester.semester }}</h5>
+        
+        <h6>Classes</h6>
+        
+        {% if semester.classes.count > 0 %}
+        <ul>
+            {% for cla in semester.classes %}
+            	<li>
+                    <a href="">{{ cla }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        {% endif %} 
+    </div>
+{% endblock %}

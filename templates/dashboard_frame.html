@@ -37,19 +37,19 @@
             <h5 class="text-white-50">Management</h5>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Semesters</a>
+                    <a class="nav-link" href="{% url 'dashboard_lectures' %}">Lectures</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'dashboard_students' %}">Students</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'dashboard_semesters' %}">Semesters</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Courses</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Classes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'dashboard_lectures' %}">Lectures</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'dashboard_students' %}">Students</a>
                 </li>
             </ul>
         </nav>

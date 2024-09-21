@@ -1,0 +1,12 @@
+{% extends 'dashboard_frame.html' %}
+
+{% block title %}
+    Semesters | Attendance
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-end pb-3 gap-3">
+        <a class="btn btn-primary" href="{% url 'dashboard_semesters_create' %}">Add New Semester</a>
+    </div>
+    {% include 'semesters/semester_list_segment.html' with semesters=semesters %}
+{% endblock %}

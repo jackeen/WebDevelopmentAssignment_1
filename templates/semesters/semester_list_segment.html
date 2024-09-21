@@ -1,0 +1,30 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Year</th>
+            <th scope="col">Semester</th>
+            <th></th>
+        </tr>
+    </thead>
+    {% if semesters.count > 0 %}
+    <tbody>
+        {% for semester in semesters %}
+        	<tr>
+                <td>{{ semester.year }}</td>
+                <td>{{ semester.semester }}</td>
+                <td>
+                    <a href="{% url 'dashboard_semesters_detail' pk=semester.id%}">View Detail</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    {% else %}
+    <tfoot>
+        <tr>
+            <td colspan="3">
+                There is no semester.
+            </td>
+        </tr>
+    </tfoot>
+    {% endif %}
+</table>
