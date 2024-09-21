@@ -31,4 +31,8 @@ urlpatterns = [
     path('dashboard/semesters', views.SemesterListView.as_view(), name='dashboard_semesters'),
     path('dashboard/semesters/<int:pk>', views.SemesterDetailView.as_view(), name='dashboard_semesters_detail'),
     path('dashboard/semesters/create', views.semester_create, name='dashboard_semesters_create'),
+
+    path('dashboard/courses', views.CourseListView.as_view(), name='dashboard_courses'),
+    path('dashboard/courses/<int:pk>', views.CourseDetailView.as_view(), name='dashboard_courses_detail'),
+    path('dashboard/courses/create', views.course_create, name='dashboard_courses_create'),
 ]

@@ -1,0 +1,30 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Course Code</th>
+            <th scope="col">Course Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    {% if courses.count > 0 %}
+    <tbody>
+        {% for course in courses %}
+        	<tr>
+                <td>{{ course.code }}</td>
+                <td>{{ course.name }}</td>
+                <td>
+                    <a href="{% url 'dashboard_courses_detail' pk=course.id%}">View Detail</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    {% else %}
+    <tfoot>
+        <tr>
+            <td colspan="3">
+                There is no course.
+            </td>
+        </tr>
+    </tfoot>
+    {% endif %}
+</table>
