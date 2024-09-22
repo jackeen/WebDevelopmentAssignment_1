@@ -1,0 +1,27 @@
+{% extends 'dashboard_frame.html' %}
+
+{% block title %}
+    {{ class.number }} detail | Attendance
+{% endblock %}
+
+{% block content %}
+    <div class="bg-dark-subtle p-3">
+        <h5 class="pb-3">Class Number: {{ class.number }}</h5>
+        
+        <h6>Semester</h6>
+        <div class="pb-3">
+            {{ class.semester.year }} {{ class.semester.semester }}
+        </div>
+    
+        <h6>Course</h6>
+        <div class="pb-3">
+            {{ class.course.code }} {{ class.course.name }}
+        </div>
+    
+        <h6>Lecture</h6>
+        <div class="pb-3">
+            {{ class.lecture.user.first_name }} {{ class.lecture.user.last_name }}
+        </div>
+        
+    </div>
+{% endblock %}

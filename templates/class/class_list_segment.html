@@ -1,0 +1,34 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Class Number</th>
+            <th scope="col">Course</th>
+            <th scope="col">Semester</th>
+            <th scope="col">Lecture</th>
+            <th></th>
+        </tr>
+    </thead>
+    {% if classes.count > 0 %}
+    <tbody>
+        {% for cls in classes %}
+        	<tr>
+                <td>{{ cls.number }}</td>
+                <td>{{ cls.course }}</td>
+                <td>{{ cls.semester }}</td>
+                <td>{{ cls.lecture }}</td>
+                <td>
+                    <a href="{% url 'dashboard_classes_detail' pk=cls.id%}">View Detail</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    {% else %}
+    <tfoot>
+        <tr>
+            <td colspan="4">
+                There is no class.
+            </td>
+        </tr>
+    </tfoot>
+    {% endif %}
+</table>

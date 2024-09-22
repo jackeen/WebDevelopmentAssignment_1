@@ -1,0 +1,56 @@
+{% extends 'dashboard_frame.html' %}
+
+{% block title %}
+    Create Class | Attendance
+{% endblock %}
+
+{% block content %}
+    <div class="bg-dark-subtle p-3">
+        <h5 class="pb-3">Create new class</h5>
+        <form method="post" action="{% url 'dashboard_classes_create' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="number" class="form-label">Class Number</label>
+                <input type="text" class="form-control" name="number" id="number">
+            </div>
+            
+            <div class="mb-3">
+                <label for="semester" class="form-label">Semester</label>
+                <select class="form-select" name="semester" id="semester">
+                    <option value="0">-- select semester --</option>
+                    {% for semester in semesters %}
+                        <option value="{{ semester.id }}">{{ semester.year }} {{ semester.semester }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        
+            <div class="mb-3">
+                <label for="course" class="form-label">Course</label>
+                <select class="form-select" name="course" id="course">
+                    <option value="0">-- select course --</option>
+                    {% for course in courses %}
+                        <option value="{{ course.id }}">{{ course.code }} {{ course.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        
+            <div class="mb-3">
+                <label for="lecture" class="form-label">Lecture</label>
+                <select class="form-select" name="lecture" id="lecture">
+                    <option value="0">-- select lecture --</option>
+                    {% for lecture in lectures %}
+                        <option value="{{ lecture.id }}">{{ lecture.user.first_name }} {{ lecture.user.last_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        
+            <ul class="mb-3 text-danger">
+            {% for error in errors %}
+            	<li>{{ error }}</li>
+            {% endfor %}
+            </ul>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+{% endblock %}
