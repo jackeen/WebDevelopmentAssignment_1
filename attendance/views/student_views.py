@@ -7,13 +7,13 @@ from attendance.models import Student
 class StudentListView(ListView):
     model = Student
     context_object_name = 'students'
-    template_name = 'dashboard_students.html'
+    template_name = 'student/dashboard_students.html'
 
 
 class StudentDetailView(DetailView):
     model = Student
     context_object_name = 'student'
-    template_name = 'dashboard_students_detail.html'
+    template_name = 'student/dashboard_students_detail.html'
 
     def get_object(self, queryset=None):
         return Student.objects.get(student_id=self.kwargs['pk'])
@@ -50,7 +50,7 @@ def student_create(request):
 
     return render(
         request=request,
-        template_name='dashboard_students_create.html',
+        template_name='student/dashboard_students_create.html',
         context={
 
         }

@@ -9,5 +9,5 @@
 {#        <a class="btn btn-secondary" href="">Upload Lectures</a>#}
         <a class="btn btn-primary" href="{% url 'dashboard_lectures_create' %}">Add New Lecture</a>
     </div>
-    {% include 'lecture_list_segment.html' with lectures=lectures %}
+    {% include 'lecture/lecture_list_segment.html' with lectures=lectures %}
 {% endblock %}

@@ -8,13 +8,13 @@ from attendance.models import Lecture
 class LectureListView(ListView):
     model = Lecture
     context_object_name = 'lectures'
-    template_name = 'dashboard_lectures.html'
+    template_name = 'lecture/dashboard_lectures.html'
 
 
 class LectureDetailView(DetailView):
     model = Lecture
     context_object_name = 'lecture'
-    template_name = 'dashboard_lectures_detail.html'
+    template_name = 'lecture/dashboard_lectures_detail.html'
 
     def get_object(self, queryset=None):
         return Lecture.objects.get(staff_id=self.kwargs['pk'])
@@ -50,5 +50,5 @@ def lecture_create(request):
 
     return render(
         request=request,
-        template_name='dashboard_lectures_create.html'
+        template_name='lecture/dashboard_lectures_create.html'
     )
