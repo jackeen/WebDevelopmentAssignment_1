@@ -1,0 +1,71 @@
+{% extends 'dashboard_frame.html' %}
+
+{% block title %}
+    Assign students | Attendance
+{% endblock %}
+
+{% block content %}
+    <div class="bg-dark-subtle p-3">
+        <h5>Assign students for class: {{ class.number }}</h5>
+        <p class="pb-4">Associated course：{{ class.course.code }} {{ class.course.name }}</p>
+
+        <div class="d-flex justify-content gap-3 pb-4">
+            <div class="border border-secondary border-2 p-3">
+                <h6>Unselected Students</h6>
+                <div class="alert alert-light" role="alert">
+                    Select and Save for <b>assigning</b> students for this class
+                </div>
+                <form method="post" action="{% url 'dashboard_classes_assign_students' class_id=class.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="operator" value="add">
+                    <div class="p-3">
+                        {% for student in students %}
+                            {% if student not in selected_students %}
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="student" 
+                                       value="{{ student.id }}" id="student_{{ student.id }}">
+                                <label class="form-check-label" for="student_{{ student.id }}">
+                                    {{ student.user.first_name }} {{ student.user.last_name }}
+                                </label>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Adding</button>
+                    <button type="reset" class="btn btn-secondary">Reset Selection</button>
+                </form>
+            </div>
+        
+            <div class="border border-primary border-2 p-3">
+                <h6>Selected Students</h6>
+                <div class="alert alert-info" role="alert">
+                    Select and Save for <b>removing</b> students for this class
+                </div>
+                <form method="post" action="{% url 'dashboard_classes_assign_students' class_id=class.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="operator" value="remove">
+                    <div class="p-3">
+                        {% for student in students %}
+                            {% if student in selected_students %}
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="student" 
+                                       value="{{ student.id }}" id="student_{{ student.id }}">
+                                <label class="form-check-label" for="student_{{ student.id }}">
+                                    {{ student.user.first_name }} {{ student.user.last_name }}
+                                </label>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Removing</button>
+                    <button type="reset" class="btn btn-secondary">Reset Selection</button>
+                </form>
+            </div>
+        </div>
+    
+        <div class="pb-3">
+            <a class="btn btn-secondary" href="{% url 'dashboard_classes' %}">Back Class List</a>
+        </div>
+
+    </div>
+{% endblock %}

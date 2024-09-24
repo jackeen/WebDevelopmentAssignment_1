@@ -34,16 +34,6 @@
                 </select>
             </div>
         
-            <div class="mb-3">
-                <label for="lecture" class="form-label">Lecture</label>
-                <select class="form-select" name="lecture" id="lecture">
-                    <option value="0">-- select lecture --</option>
-                    {% for lecture in lectures %}
-                        <option value="{{ lecture.id }}">{{ lecture.user.first_name }} {{ lecture.user.last_name }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-        
             <ul class="mb-3 text-danger">
             {% for error in errors %}
             	<li>{{ error }}</li>

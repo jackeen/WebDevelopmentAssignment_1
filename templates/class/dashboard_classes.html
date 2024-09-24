@@ -5,7 +5,8 @@
 {% endblock %}
 
 {% block content %}
-    <div class="d-flex justify-content-end pb-3 gap-3">
+    <div class="d-flex justify-content-between pb-3 gap-3">
+        <h5>Class Management</h5>
         <a class="btn btn-primary" href="{% url 'dashboard_classes_create' %}">Add New Class</a>
     </div>
     {% include 'class/class_list_segment.html' with courses=courses %}

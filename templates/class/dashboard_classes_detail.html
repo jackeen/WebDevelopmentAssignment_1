@@ -6,22 +6,43 @@
 
 {% block content %}
     <div class="bg-dark-subtle p-3">
-        <h5 class="pb-3">Class Number: {{ class.number }}</h5>
-        
-        <h6>Semester</h6>
-        <div class="pb-3">
-            {{ class.semester.year }} {{ class.semester.semester }}
+        <h1 class="pb-3">Class Number: {{ class.number }}</h1>
+        <ul class="list-group pb-3">
+            <li class="list-group-item">
+                Semester: {{ class.semester.year }} {{ class.semester.semester }}
+            </li>
+            <li class="list-group-item">
+                Course: {{ class.course.code }} {{ class.course.name }}
+            </li>
+            <li class="list-group-item">
+                Lecture: {{ class.lecture.user.first_name }} {{ class.lecture.user.last_name }}
+            </li>
+        </ul>
+    
+        <div class="pb-3 pt-3">
+            <h3>Enrolled Students</h3>
+            <table class="table table-striped">
+                <thead>
+                    <th>ID</th>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                </thead>
+                <tbody>
+                    {% for student in class.students.all %}
+                        <tr>
+                            <td>{{ student.id }}</td>
+                            <td>{{ student.student_id }}</td>
+                            <td>{{ student.user.first_name }} {{ student.user.last_name }}</td>
+                            <td>{{ student.user.email }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     
-        <h6>Course</h6>
         <div class="pb-3">
-            {{ class.course.code }} {{ class.course.name }}
+            <a class="btn btn-secondary" href="{% url 'dashboard_classes' %}">Back Class List</a>
         </div>
-    
-        <h6>Lecture</h6>
-        <div class="pb-3">
-            {{ class.lecture.user.first_name }} {{ class.lecture.user.last_name }}
-        </div>
-        
     </div>
 {% endblock %}

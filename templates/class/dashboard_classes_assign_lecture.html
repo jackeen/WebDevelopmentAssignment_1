@@ -1,0 +1,36 @@
+{% extends 'dashboard_frame.html' %}
+
+{% block title %}
+    Create Class | Attendance
+{% endblock %}
+
+{% block content %}
+    <div class="bg-dark-subtle p-3">
+        <h5 class="pb-3">Assign lecture for class: {{ class.number }}</h5>
+    
+{#        <h6>Associated course</h6>#}
+{#        <div class="pb-3">{{ class.course.code }} {{ class.course.name }}</div>#}
+    
+        <form method="post" action="{% url 'dashboard_classes_assign_lecture' class_id=class.id %}">
+            {% csrf_token %}
+        
+            <div class="mb-3">
+                <label for="lecture" class="form-label">Lecture</label>
+                <select class="form-select mb-1" name="lecture" id="lecture">
+                    <option value="-1">-- select lecture --</option>
+                    {% for lecture in lectures %}
+                        <option value="{{ lecture.id }}" {% if class.lecture.id == lecture.id %}
+                        	selected
+                        {% endif %} >
+                            {{ lecture.user.first_name }} {{ lecture.user.last_name }}
+                        </option>
+                    {% endfor %}
+                </select>
+                <p>select first item for deleting current lecture</p>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a class="btn btn-secondary" href="{% url 'dashboard_classes' %}">Cancel</a>
+        </form>
+    </div>
+{% endblock %}

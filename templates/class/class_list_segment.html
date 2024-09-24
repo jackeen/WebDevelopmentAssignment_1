@@ -1,10 +1,11 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">Class Number</th>
+            <th scope="col">Number</th>
             <th scope="col">Course</th>
             <th scope="col">Semester</th>
             <th scope="col">Lecture</th>
+            <th scope="col">Students' count</th>
             <th></th>
         </tr>
     </thead>
@@ -13,11 +14,21 @@
         {% for cls in classes %}
         	<tr>
                 <td>{{ cls.number }}</td>
-                <td>{{ cls.course }}</td>
-                <td>{{ cls.semester }}</td>
-                <td>{{ cls.lecture }}</td>
+                <td>{{ cls.course.code }} {{ cls.course.name }}</td>
+                <td>{{ cls.semester.year }} {{ cls.semester.semester }}</td>
                 <td>
-                    <a href="{% url 'dashboard_classes_detail' pk=cls.id%}">View Detail</a>
+                    {% if cls.lecture %}
+                    	{{ cls.lecture.user.first_name }} {{ cls.lecture.user.last_name }}
+                    {% else %}
+                        Not assigned
+                    {% endif %} 
+                </td>
+                <td>{{ cls.students.count }}</td>
+                <td class="d-flex justify-content-end gap-1">
+                    <a class="btn btn-primary" href="{% url 'dashboard_classes_detail' pk=cls.id%}">Detail</a>
+                    <a class="btn btn-primary" href="{% url 'dashboard_classes_assign_students' class_id=cls.id %}">Assign students</a>
+                    <a class="btn btn-primary" href="{% url 'dashboard_classes_assign_lecture' class_id=cls.id  %}">Assign lecture</a>
+                    <a class="btn btn-danger" href="{% url 'dashboard_classes_delete' pk=cls.id %}">Delete</a>
                 </td>
             </tr>
         {% endfor %}
@@ -25,7 +36,7 @@
     {% else %}
     <tfoot>
         <tr>
-            <td colspan="4">
+            <td colspan="5">
                 There is no class.
             </td>
         </tr>

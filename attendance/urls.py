@@ -39,4 +39,11 @@ urlpatterns = [
     path('dashboard/classes', views.ClassListView.as_view(), name='dashboard_classes'),
     path('dashboard/classes/<int:pk>', views.ClassDetailView.as_view(), name='dashboard_classes_detail'),
     path('dashboard/classes/create', views.class_create, name='dashboard_classes_create'),
+    path('dashboard/classes/delete/<int:pk>', views.ClassDeleteView.as_view(), name='dashboard_classes_delete'),
+    path('dashboard/classes/assign/lecture/<int:class_id>',
+         views.class_assign_lecture,
+         name='dashboard_classes_assign_lecture'),
+    path('dashboard/classes/assign/students/<int:class_id>',
+         views.class_assign_students,
+         name='dashboard_classes_assign_students'),
 ]

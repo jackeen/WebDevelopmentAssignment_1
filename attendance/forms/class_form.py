@@ -1,15 +1,15 @@
 from django import forms
 
-from attendance.models import Class
+from attendance.models import Class, Lecture
 
 
 class ClassForm(forms.ModelForm):
     class Meta:
         model = Class
-        fields = ['number', 'course', 'lecture', 'semester']
-        widgets = {
-            'number': forms.NumberInput(),
-            'course': forms.Select(),
-            'lecture': forms.Select(),
-            'semester': forms.Select(),
-        }
+        fields = ['number', 'course', 'semester']
+
+
+class ClassStudentForm(forms.ModelForm):
+    class Meta:
+        model = Class
+        fields = ['students']

@@ -1,0 +1,21 @@
+{% extends 'dashboard_frame.html' %}
+
+{% block title %}
+    {{ class.number }} detail | Attendance
+{% endblock %}
+
+{% block content %}
+    <div class="bg-dark-subtle p-3">
+        <h5 class="pb-3">Class Number: {{ class.number }}</h5>
+        
+        <h6 class="pb-3">Do you confirm to delete this class?</h6>
+        <div class="pb-3">
+            <form method="post" action="{% url 'dashboard_classes_delete' pk=class.id %}">
+                {% csrf_token %}
+                <button class="btn btn-danger">Confirm</button>
+                <a class="btn btn-secondary" href="{% url 'dashboard_classes' %}">Cancel</a>
+            </form>
+        </div>
+        
+    </div>
+{% endblock %}
