@@ -8,4 +8,4 @@ class SemesterForm(forms.ModelForm):
 
     class Meta:
         model = Semester
-        fields = ['year', 'semester']
+        fields = ['year', 'semester', 'start_date', 'end_date']

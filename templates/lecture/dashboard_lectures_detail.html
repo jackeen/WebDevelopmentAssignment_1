@@ -6,17 +6,24 @@
 
 {% block content %}
     <div class="bg-dark-subtle p-3">
-        <h5 class="pb-3">Staff ID: {{ lecture.staff_id }}</h5>
+        <h3 class="pb-3">Staff ID: {{ lecture.staff_id }}</h3>
         
         <h6>Personal Information</h6>
-        <ul>
-            <li>User Name: {{ lecture.user.username }}</li>
-            <li>Full Name: {{ lecture.user.first_name }} {{ lecture.user.last_name }}</li>
-            <li>Email: {{ lecture.user.email }}</li>
+        <ul class="list-group pb-3">
+            <li class="list-group-item">
+                User Name: {{ lecture.user.username }}
+            </li>
+            <li class="list-group-item">
+                Full Name: {{ lecture.user.first_name }} {{ lecture.user.last_name }}
+            </li>
+            <li class="list-group-item">
+                Email: {{ lecture.user.email }}
+            </li>
         </ul>
     
-        
+        <div class="pb-3">
+            <a class="btn btn-secondary" href="{% url 'dashboard_lectures' %}">Back Lecture List</a>
+        </div>
     
-        
     </div>
 {% endblock %}

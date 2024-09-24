@@ -23,18 +23,22 @@ urlpatterns = [
     path('dashboard/students', views.StudentListView.as_view(), name='dashboard_students'),
     path('dashboard/students/<int:pk>', views.StudentDetailView.as_view(), name='dashboard_students_detail'),
     path('dashboard/students/create', views.student_create, name='dashboard_students_create'),
+    path('dashboard/students/delete/<int:pk>', views.StudentDeleteView.as_view(), name='dashboard_students_delete'),
 
     path('dashboard/lectures', views.LectureListView.as_view(), name='dashboard_lectures'),
     path('dashboard/lectures/<int:pk>', views.LectureDetailView.as_view(), name='dashboard_lectures_detail'),
     path('dashboard/lectures/create', views.lecture_create, name='dashboard_lectures_create'),
+    path('dashboard/lectures/delete/<int:pk>', views.LectureDeleteView.as_view(), name='dashboard_lectures_delete'),
 
     path('dashboard/semesters', views.SemesterListView.as_view(), name='dashboard_semesters'),
     path('dashboard/semesters/<int:pk>', views.SemesterDetailView.as_view(), name='dashboard_semesters_detail'),
     path('dashboard/semesters/create', views.semester_create, name='dashboard_semesters_create'),
+    path('dashboard/semesters/delete/<int:pk>', views.SemesterDeleteView.as_view(), name='dashboard_semesters_delete'),
 
     path('dashboard/courses', views.CourseListView.as_view(), name='dashboard_courses'),
     path('dashboard/courses/<int:pk>', views.CourseDetailView.as_view(), name='dashboard_courses_detail'),
     path('dashboard/courses/create', views.course_create, name='dashboard_courses_create'),
+    path('dashboard/courses/delete/<int:pk>', views.CourseDeleteView.as_view(), name='dashboard_courses_delete'),
 
     path('dashboard/classes', views.ClassListView.as_view(), name='dashboard_classes'),
     path('dashboard/classes/<int:pk>', views.ClassDetailView.as_view(), name='dashboard_classes_detail'),

@@ -1,0 +1,25 @@
+<table class="table table-striped">
+    <thead>
+        <th>ID</th>
+        <th>Student ID</th>
+        <th>Name</th>
+        <th>Email</th>
+    </thead>
+    <tbody>
+        {% for student in class.students.all %}
+            <tr>
+                <td>{{ student.id }}</td>
+                <td>{{ student.student_id }}</td>
+                <td>{{ student.user.first_name }} {{ student.user.last_name }}</td>
+                <td>{{ student.user.email }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    {% if students.count == 0 %}
+    <tfoot>
+        <tr>
+            <td colspan="4">There is no student.</td>
+        </tr>
+    </tfoot>
+    {% endif %}
+</table>

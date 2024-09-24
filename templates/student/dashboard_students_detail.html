@@ -6,24 +6,26 @@
 
 {% block content %}
     <div class="bg-dark-subtle p-3">
-        <h5 class="pb-3">Student ID: {{ student.student_id }}</h5>
+        <h3 class="pb-3">Student ID: {{ student.student_id }}</h3>
         
         <h6>Personal Information</h6>
-        <ul>
-            <li>User Name: {{ student.user.username }}</li>
-            <li>Full Name: {{ student.user.first_name }} {{ student.user.last_name }}</li>
-            <li>Email: {{ student.user.email }}</li>
+        <ul class="list-group pb-3">
+            <li class="list-group-item">
+                User Name: {{ student.user.username }}
+            </li>
+            <li class="list-group-item">
+                Full Name: {{ student.user.first_name }} {{ student.user.last_name }}
+            </li>
+            <li class="list-group-item">
+                Email: {{ student.user.email }}
+            </li>
         </ul>
     
         <h6>Enrolled Classes</h6>
-        {% if student.classes.count > 0 %}
-        <ul>
-        {% for cla in student.classes %}
-            <li>{{ cla.number }}, {{ cla.course }}</li>
-        {% endfor %}
-        </ul>
-        {% endif %} 
+        {% include 'class/class_list_display_segment.html' with classes=student.classes.all %}
     
-        
+        <div class="pb-3">
+            <a class="btn btn-secondary" href="{% url 'dashboard_students' %}">Back Student List</a>
+        </div>
     </div>
 {% endblock %}

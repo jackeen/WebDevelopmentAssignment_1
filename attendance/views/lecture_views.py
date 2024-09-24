@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
-from django.views.generic import ListView, DetailView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, DeleteView
 
 from attendance.models import Lecture
 
@@ -52,3 +53,12 @@ def lecture_create(request):
         request=request,
         template_name='lecture/dashboard_lectures_create.html'
     )
+
+
+class LectureDeleteView(DeleteView):
+    model = Lecture
+    template_name = 'lecture/dashboard_lectures_delete_confirm.html'
+    success_url = reverse_lazy('dashboard_lectures')
+
+    def get_object(self, queryset=None):
+        return Lecture.objects.get(staff_id=self.kwargs['pk'])

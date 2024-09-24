@@ -1,26 +1,20 @@
 {% extends 'dashboard_frame.html' %}
 
 {% block title %}
-    {{ semester.year }} {{ semester.semester }} delete | Attendance
+    {{ lecture.user.first_name }} {{ lecture.user.last_name }} delete | Attendance
 {% endblock %}
 
 {% block content %}
     <div class="bg-dark-subtle p-3">
-        <h1 class="pb-3">Semester: {{ semester.year }} {{ semester.semester }}</h1>
+        <h3 class="pb-3">Lecture: {{ lecture.staff_id }}, {{ lecture.user.first_name }} {{ lecture.user.last_name }}</h3>
         
-        <h6 class="pb-3">Do you confirm to delete this semester?</h6>
-        <div class="alert alert-warning" role="alert">
-          To delete the semester will cause associated classed be deleted.
-        </div>
-        
-        <h6>Class list</h6>
-        {% include 'class/class_list_display_segment.html' with classes=classes %}
+        <h6 class="pb-3">Do you confirm to delete this lecture?</h6>
         
         <div class="pb-3">
-            <form method="post" action="{% url 'dashboard_semesters_delete' pk=semester.id %}">
+            <form method="post" action="{% url 'dashboard_lectures_delete' pk=lecture.id %}">
                 {% csrf_token %}
                 <button class="btn btn-danger">Confirm</button>
-                <a class="btn btn-secondary" href="{% url 'dashboard_semesters' %}">Cancel</a>
+                <a class="btn btn-secondary" href="{% url 'dashboard_lectures' %}">Cancel</a>
             </form>
         </div>
         

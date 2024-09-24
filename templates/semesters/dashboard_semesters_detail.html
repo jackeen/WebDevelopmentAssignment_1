@@ -6,18 +6,21 @@
 
 {% block content %}
     <div class="bg-dark-subtle p-3">
-        <h5 class="pb-3">{{ semester.year }} {{ semester.semester }}</h5>
-        
-        <h6>Classes</h6>
-        
-        {% if semester.classes.count > 0 %}
-        <ul>
-            {% for cla in semester.classes %}
-            	<li>
-                    <a href="">{{ cla }}</a>
-                </li>
-            {% endfor %}
+        <h1>{{ semester.year }} {{ semester.semester }}</h1>
+    
+        <ul class="list-group pb-3">
+            <li class="list-group-item">
+                Start date: {{ semester.start_date }}
+            </li>
+            <li class="list-group-item">
+                End date: {{ semester.end_date }}
+            </li>
         </ul>
-        {% endif %} 
+    
+        <h2>Classes included</h2>
+        {% include 'class/class_list_display_segment.html' with class=semester.class %}
+        <div class="pb-3">
+            <a class="btn btn-secondary" href="{% url 'dashboard_semesters' %}">Back Semesters List</a>
+        </div> 
     </div>
 {% endblock %}

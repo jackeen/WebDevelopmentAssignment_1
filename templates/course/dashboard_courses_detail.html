@@ -6,18 +6,13 @@
 
 {% block content %}
     <div class="bg-dark-subtle p-3">
-        <h5 class="pb-3">{{ course.code }} {{ course.name }}</h5>
+        <h3 class="pb-3">{{ course.code }} {{ course.name }}</h3>
         
-        <h6>Classes</h6>
+        <h6>Associated class list</h6>
+        {% include 'class/class_list_display_segment.html' with classes=classes %}
         
-{#        {% if semester.classes.count > 0 %}#}
-{#        <ul>#}
-{#            {% for cla in semester.classes %}#}
-{#            	<li>#}
-{#                    <a href="">{{ cla }}</a>#}
-{#                </li>#}
-{#            {% endfor %}#}
-{#        </ul>#}
-{#        {% endif %} #}
+        <div class="pb-3">
+            <a class="btn btn-secondary" href="{% url 'dashboard_courses' %}">Back Course List</a>
+        </div>
     </div>
 {% endblock %}

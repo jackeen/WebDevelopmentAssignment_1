@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="bg-dark-subtle p-3">
-        <h1 class="pb-3">Class Number: {{ class.number }}</h1>
+        <h3 class="pb-3">Class Number: {{ class.number }}</h3>
         <ul class="list-group pb-3">
             <li class="list-group-item">
                 Semester: {{ class.semester.year }} {{ class.semester.semester }}
@@ -20,25 +20,8 @@
         </ul>
     
         <div class="pb-3 pt-3">
-            <h3>Enrolled Students</h3>
-            <table class="table table-striped">
-                <thead>
-                    <th>ID</th>
-                    <th>Student ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                </thead>
-                <tbody>
-                    {% for student in class.students.all %}
-                        <tr>
-                            <td>{{ student.id }}</td>
-                            <td>{{ student.student_id }}</td>
-                            <td>{{ student.user.first_name }} {{ student.user.last_name }}</td>
-                            <td>{{ student.user.email }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            <h6>Enrolled Students</h6>
+            {% include 'student/student_list_display_segment.html' with students=class.students %}
         </div>
     
         <div class="pb-3">

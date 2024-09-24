@@ -18,7 +18,17 @@
                 <label for="semester" class="form-label">Semester</label>
                 <input type="text" class="form-control" name="semester" id="semester">
             </div>
-
+        
+            <div class="mb-3">
+                <label for="start_date" class="form-label">Start Date</label>
+                <input type="date" class="form-control" name="start_date" id="start_date">
+            </div>
+        
+            <div class="mb-3">
+                <label for="end_date" class="form-label">End Date</label>
+                <input type="date" class="form-control" name="end_date" id="end_date">
+            </div>
+        
             <ul class="mb-3 text-danger">
             {% for error in errors %}
             	<li>{{ error }}</li>

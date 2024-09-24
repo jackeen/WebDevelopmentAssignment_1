@@ -1,8 +1,10 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView, UpdateView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 
-from attendance.models import Student
+from attendance.models import Student, Class
+
 
 class StudentListView(ListView):
     model = Student
@@ -55,3 +57,13 @@ def student_create(request):
 
         }
     )
+
+
+class StudentDeleteView(DeleteView):
+    model = Student
+    context_object_name = 'student'
+    template_name = 'student/dashboard_students_delete_confirm.html'
+    success_url = reverse_lazy('dashboard_students')
+
+    def get_object(self, queryset=None):
+        return Student.objects.get(student_id=self.kwargs['pk'])

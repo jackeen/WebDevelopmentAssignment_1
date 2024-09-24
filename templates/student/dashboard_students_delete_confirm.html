@@ -1,0 +1,24 @@
+{% extends 'dashboard_frame.html' %}
+
+{% block title %}
+    {{ student.user.first_name }} {{ student.user.last_name }} delete | Attendance
+{% endblock %}
+
+{% block content %}
+    <div class="bg-dark-subtle p-3">
+        <h3 class="pb-3">
+            Student: {{ student.student_id }}, {{ student.user.first_name }} {{ student.user.last_name }}
+        </h3>
+        
+        <h6 class="pb-3">Do you confirm to delete this student?</h6>
+        
+        <div class="pb-3">
+            <form method="post" action="{% url 'dashboard_students_delete' pk=student.id %}">
+                {% csrf_token %}
+                <button class="btn btn-danger">Confirm</button>
+                <a class="btn btn-secondary" href="{% url 'dashboard_students' %}">Cancel</a>
+            </form>
+        </div>
+        
+    </div>
+{% endblock %}

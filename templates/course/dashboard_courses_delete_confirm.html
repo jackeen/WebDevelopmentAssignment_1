@@ -1,0 +1,28 @@
+{% extends 'dashboard_frame.html' %}
+
+{% block title %}
+    {{ course.code }} {{ course.name }} delete | Attendance
+{% endblock %}
+
+{% block content %}
+    <div class="bg-dark-subtle p-3">
+        <h3 class="pb-3">Course: {{ course.code }} {{ course.name }}</h3>
+
+        <h6 class="pb-3">Do you confirm to delete this class?</h6>
+        <div class="alert alert-warning" role="alert">
+          To delete the course will cause associated classed be deleted.
+        </div>
+        
+        <h6>Associated class list</h6>
+        {% include 'class/class_list_display_segment.html' with classes=classes %}
+
+        <div class="pb-3">
+            <form method="post" action="{% url 'dashboard_courses_delete' pk=course.id %}">
+                {% csrf_token %}
+                <button class="btn btn-danger">Confirm</button>
+                <a class="btn btn-secondary" href="{% url 'dashboard_courses' %}">Cancel</a>
+            </form>
+        </div>
+
+    </div>
+{% endblock %}
