@@ -1,9 +1,9 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 
-from attendance.models import Student, Class
+from attendance.models import Student, GROUP_STUDENT
 
 
 class StudentListView(ListView):
@@ -40,6 +40,10 @@ def student_create(request):
             password=password
         )
         user.save()
+
+        group, _ = Group.objects.get_or_create(name=GROUP_STUDENT)
+        group.user_set.add(user)
+        group.save()
 
         student = Student(
             student_id=student_id,

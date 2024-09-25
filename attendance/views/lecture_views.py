@@ -1,9 +1,9 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group, Permission
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, DeleteView
 
-from attendance.models import Lecture
+from attendance.models import Lecture, GROUP_LECTURE
 
 
 class LectureListView(ListView):
@@ -39,6 +39,10 @@ def lecture_create(request):
             password=password
         )
         user.save()
+
+        group, _ = Group.objects.get_or_create(name=GROUP_LECTURE)
+        group.user_set.add(user)
+        group.save()
 
         lecture = Lecture(
             staff_id=staff_id,

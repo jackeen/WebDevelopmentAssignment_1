@@ -50,4 +50,6 @@ urlpatterns = [
     path('dashboard/classes/assign/students/<int:class_id>',
          views.class_assign_students,
          name='dashboard_classes_assign_students'),
+
+    path('error/403', views.error_403_view, name='error_403'),
 ]

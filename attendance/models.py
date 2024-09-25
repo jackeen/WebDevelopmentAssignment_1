@@ -3,6 +3,8 @@ from datetime import date, timedelta
 from django.contrib.auth.models import User
 from django.db import models
 
+GROUP_STUDENT = "student"
+GROUP_LECTURE = "lecture"
 
 class Student(models.Model):
     student_id = models.IntegerField(unique=True)
