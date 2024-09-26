@@ -18,7 +18,7 @@ urlpatterns = [
     path("login_system", LoginView.as_view(), name="login_system"),
     path("logout_system", LogoutView.as_view(), name="logout_system"),
 
-    path('dashboard', views.dashboard, name='dashboard'),
+    path('dashboard', views.dashboard, name='dashboard_home'),
 
     path('dashboard/students', views.StudentListView.as_view(), name='dashboard_students'),
     path('dashboard/students/<int:pk>', views.StudentDetailView.as_view(), name='dashboard_students_detail'),
@@ -50,6 +50,14 @@ urlpatterns = [
     path('dashboard/classes/assign/students/<int:class_id>',
          views.class_assign_students,
          name='dashboard_classes_assign_students'),
+
+    path('dashboard/attendance/manage/<int:class_id>',
+         views.attendance_manage,
+         name='dashboard_attendance_manage'),
+
+    path('dashboard/attendance/confirm/<int:class_id>/student/<int:student_id>/<str:status>',
+         views.attendance_confirm,
+         name='dashboard_attendance_confirm'),
 
     path('error/403', views.error_403_view, name='error_403'),
 ]

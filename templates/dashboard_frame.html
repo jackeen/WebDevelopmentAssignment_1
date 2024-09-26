@@ -12,7 +12,7 @@
 <body class="bg-body-secondary">
 <main class="d-flex">
     <div class="d-flex flex-column flex-shrink-0 p-4 text-bg-dark vh-100">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+        <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             <span class="fs-4">Attendance</span>
         </a>
         <hr>
@@ -37,6 +37,9 @@
 {#        </p>#}
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
+                <a class="nav-link text-white {% if 'dashboard_home' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'dashboard_home' %}">Home</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link text-white {% if 'dashboard_lectures' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'dashboard_lectures' %}">Lectures</a>
             </li>
             <li class="nav-item">
@@ -50,12 +53,6 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white {% if 'dashboard_classes' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'dashboard_classes' %}">Classes</a>
-            </li>
-        </ul>
-
-        <ul class="nav nav-pills flex-column mb-auto">
-            <li class="nav-item">
-                <a class="nav-link text-white">my classes</a>
             </li>
         </ul>
     </div>

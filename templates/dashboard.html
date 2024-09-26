@@ -5,5 +5,15 @@
 {% endblock %}
 
 {% block content %}
+    {% if user.is_superuser %}
+        {% include 'dashboard/admin_fragment.html' %}
+    {% endif %}
 
+    {% if user.groups.all.0.name == "student" %}
+        {% include 'dashboard/student_fragment.html' %}
+    {% endif %}
+    
+    {% if user.groups.all.0.name == "lecture" %}
+        {% include 'dashboard/lecture_fragment.html' with classes=classes %}
+    {% endif %}
 {% endblock %}

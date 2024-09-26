@@ -13,7 +13,7 @@ def login_custom(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('dashboard')
+                return redirect('dashboard_home')
     else:
         form = AuthenticationForm()
     return render(

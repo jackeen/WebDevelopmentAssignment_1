@@ -1,0 +1,48 @@
+{% extends 'dashboard_frame.html' %}
+
+{% block title %}
+    Students | Attendance
+{% endblock %}
+
+{% block content %}
+    <div class="bg-dark-subtle p-3">
+        <h5 class="pb-3">
+            Attendance
+            {% if status == 'P' %}
+                present
+            {% else %}
+                absent
+            {% endif %}
+            confirm
+        </h5>
+        <form action="{% url 'dashboard_attendance_confirm' class_id=class.id student_id=student.id status=status %}" method="post">
+
+            {% csrf_token %}
+            <p>Student: {{ student }}</p>
+            <p>Class: {{ class.number }} - {{ class.course.code }} {{ class.course.name }}</p>
+            <p>
+                Semester: {{ class.semester.year }} {{ class.semester.semester }} 
+                {{ class.semester.start_date }} - {{ class.semester.end_date }}
+            </p>
+            <br>
+
+            <h3>Select Day</h3>
+            <label>
+                <select name="college_day" class="form-select form-select-lg mb-3">
+                    {% for day in college_days %}
+                        <option value="{{ day.date | date:"Y-m-d" }}">{{ day.date | date:"Y-m-d" }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+            <br>
+        
+            <div>
+                <button class="btn btn-primary" type="submit">Confirm</button>
+                <a class="btn btn-secondary" href="{% url 'dashboard_attendance_manage' class_id=class.id %}">Cancel</a>
+            </div>
+            <br>
+        </form>
+    </div>
+{% endblock %}
+
+

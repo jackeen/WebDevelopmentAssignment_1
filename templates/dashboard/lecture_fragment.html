@@ -1,0 +1,18 @@
+<div class="bg-dark-subtle p-3">
+    <h5 class="pb-3">Welcome: {{ user }} (lecture)</h5>
+    <div class="d-flex gap-3">
+
+        {% for cla in classes %}
+        <div class="card flex-grow-1">
+            <div class="card-body">
+                <h5 class="card-title">{{ cla.number }} - {{ cla.course }}</h5>
+                <p class="card-text">Students count: {{ cla.students.count }}</p>
+                <a href="{% url 'dashboard_attendance_manage' class_id=cla.id %}" class="card-link">
+                    Manage Class Attendance
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>

@@ -1,0 +1,66 @@
+{% extends 'dashboard_frame.html' %}
+
+{% block title %}
+    Students Attendance | Attendance
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-end pb-3 gap-3">
+        Class information: {{ class.number }} - {{ class.course }}
+    </div>
+    <table class="table">
+    <thead>
+        <tr>
+            <th scope="col">StudentID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Attendance</th>
+            <th></th>
+        </tr>
+    </thead>
+    {% if class.students.count > 0 %}
+    <tbody>
+        {% for student in class.students.all %}
+        	<tr>
+                <td>{{ student.student_id }}</td>
+                <td>{{ student.user.first_name }} {{ student.user.last_name }}</td>
+                <td>
+                    {{ student.user.email }}
+                    <a href="mailto:{{ student.user.email }}" class="btn btn-secondary">Send Email</a>
+                </td>
+                <td>
+                    {% for student_id, v in attendance_dict.items %}
+                    	{% if student.id == student_id %}
+                    		Present: {{ v.present_count }}, Absent: {{ v.absent_count }}
+                    	{% endif %} 
+                    {% endfor %}
+                    
+                </td>
+                <td>
+                    {% with present='P' %}
+                    <a class="btn btn-success" 
+                       href="{% url 'dashboard_attendance_confirm' class_id=class.id student_id=student.id status=present %}">
+                        Present</a>
+                    {% endwith %}
+                
+                    {% with absent='A' %}
+                    <a class="btn btn-warning" 
+                       href="{% url 'dashboard_attendance_confirm' class_id=class.id student_id=student.id status=absent %}">
+                        Absent</a>
+                    {% endwith %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    {% else %}
+    <tfoot>
+        <tr>
+            <td colspan="5">
+                There is no student.
+            </td>
+        </tr>
+    </tfoot>
+    {% endif %}
+</table>
+    
+{% endblock %}
