@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, DeleteView
 
+from attendance.forms import UserUpdateForm, LectureUpdateForm, UserCreateForm, LectureCreateForm
 from attendance.models import Lecture, GROUP_LECTURE
 
 
@@ -18,44 +19,57 @@ class LectureDetailView(DetailView):
     template_name = 'lecture/dashboard_lectures_detail.html'
 
     def get_object(self, queryset=None):
-        return Lecture.objects.get(staff_id=self.kwargs['pk'])
+        return Lecture.objects.get(id=self.kwargs['pk'])
 
 
 def lecture_create(request):
+    errors = []
     if request.method == 'POST':
-        staff_id = request.POST['staff_id']
-        date_of_birth = request.POST['date_of_birth']
-        first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
-        email = request.POST['email']
-        user_name = request.POST['user_name']
-        password = date_of_birth.replace('-', '')
-
-        user = User(
-            username=user_name,
-            first_name=first_name,
-            last_name=last_name,
-            email=email,
-            password=password
-        )
-        user.save()
-
-        group, _ = Group.objects.get_or_create(name=GROUP_LECTURE)
-        group.user_set.add(user)
-        group.save()
-
-        lecture = Lecture(
-            staff_id=staff_id,
-            date_of_birth=date_of_birth,
-            user=user
-        )
-        lecture.save()
-
-        return redirect('dashboard_lectures')
+        user_form = UserCreateForm(request.POST)
+        lecture_form = LectureCreateForm(request.POST)
+        if user_form.is_valid() and lecture_form.is_valid():
+            user = user_form.save()
+            lecture = lecture_form.save(commit=False)
+            lecture.user = user
+            lecture.save()
+            return redirect('dashboard_lectures')
+        else:
+            errors = lecture_form.errors
+            errors.update(user_form.errors)
 
     return render(
         request=request,
-        template_name='lecture/dashboard_lectures_create.html'
+        template_name='lecture/dashboard_lectures_create.html',
+        context={
+            'errors': errors
+        }
+    )
+
+
+def lecture_update(request, pk):
+    lecture = Lecture.objects.get(id=pk)
+    user = lecture.user
+    errors = []
+    if request.method == 'POST':
+        user_form = UserUpdateForm(request.POST, instance=user)
+        lecture_form = LectureUpdateForm(request.POST, instance=lecture)
+        if user_form.is_valid() and lecture_form.is_valid():
+            user = user_form.save()
+            lecture = lecture_form.save(commit=False)
+            lecture.user = user
+            lecture.save()
+            return redirect('dashboard_lectures')
+        else:
+            errors = lecture_form.errors
+            errors.update(user_form.errors)
+
+    return render(
+        request=request,
+        template_name='lecture/dashboard_lectures_update.html',
+        context={
+            'lecture': lecture,
+            'errors': errors
+        }
     )
 
 
@@ -65,4 +79,4 @@ class LectureDeleteView(DeleteView):
     success_url = reverse_lazy('dashboard_lectures')
 
     def get_object(self, queryset=None):
-        return Lecture.objects.get(staff_id=self.kwargs['pk'])
+        return Lecture.objects.get(id=self.kwargs['pk'])

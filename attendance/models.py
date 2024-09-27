@@ -6,6 +6,7 @@ from django.db import models
 GROUP_STUDENT = "student"
 GROUP_LECTURE = "lecture"
 
+
 class Student(models.Model):
     student_id = models.IntegerField(unique=True)
     date_of_birth = models.DateField()

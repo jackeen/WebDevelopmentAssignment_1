@@ -15,8 +15,9 @@
                 <td>{{ lecture.user.first_name }} {{ lecture.user.last_name }}</td>
                 <td>{{ lecture.user.email }}</td>
                 <td>
-                    <a class="btn btn-primary" href="{% url 'dashboard_lectures_detail' pk=lecture.staff_id %}">Detail</a>
-                    <a class="btn btn-danger" href="{% url 'dashboard_lectures_delete' pk=lecture.staff_id %}">Delete</a>
+                    <a class="btn btn-primary" href="{% url 'dashboard_lectures_detail' pk=lecture.id %}">Detail</a>
+                    <a class="btn btn-primary" href="{% url 'dashboard_lectures_update' pk=lecture.id %}">Update</a>
+                    <a class="btn btn-danger" href="{% url 'dashboard_lectures_delete' pk=lecture.id %}">Delete</a>
                 </td>
             </tr>
         {% endfor %}

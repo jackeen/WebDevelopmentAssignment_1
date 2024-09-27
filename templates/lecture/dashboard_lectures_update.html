@@ -7,36 +7,43 @@
 {% block content %}
     <div class="bg-dark-subtle p-3">
         <h5 class="pb-3">Create new lecture</h5>
-        <form method="post" action="{% url 'dashboard_lectures_create' %}">
+        <form method="post" action="{% url 'dashboard_lectures_update' pk=lecture.id %}">
             {% csrf_token %}
+        
             <div class="mb-3">
                 <label for="staff_id" class="form-label">Staff ID</label>
-                <input type="text" class="form-control" name="staff_id" id="staff_id">
+                <input type="text" class="form-control" name="staff_id" id="staff_id" 
+                       value="{{ lecture.staff_id }}">
             </div>
             
             <div class="mb-3">
                 <label for="date_of_birth" class="form-label">Date of birth</label>
-                <input type="date" class="form-control" name="date_of_birth" id="date_of_birth">
+                <input type="date" class="form-control" name="date_of_birth" id="date_of_birth" 
+                       value="{{ lecture.date_of_birth|date:'Y-m-d' }}">
             </div>
             
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" name="email" id="email">
+                <input type="email" class="form-control" name="email" id="email" 
+                       value="{{ lecture.user.email }}">
             </div>
             
             <div class="mb-3">
                 <label for="first_name" class="form-label">First name</label>
-                <input type="text" class="form-control" name="first_name" id="first_name">
+                <input type="text" class="form-control" name="first_name" id="first_name" 
+                       value="{{ lecture.user.first_name }}">
             </div>
             
             <div class="mb-3">
                 <label for="last_name" class="form-label">Last name</label>
-                <input type="text" class="form-control" name="last_name" id="last_name">
+                <input type="text" class="form-control" name="last_name" id="last_name" 
+                       value="{{ lecture.user.last_name }}">
             </div>
             
             <div class="mb-3">
                 <label for="user_name" class="form-label">User name</label>
-                <input type="text" class="form-control" name="username" id="user_name">
+                <input disabled type="text" class="form-control" name="user_name" id="user_name" 
+                       value="{{ lecture.user.username }}">
             </div>
             
             <ul class="mb-3 text-danger">
