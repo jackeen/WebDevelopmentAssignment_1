@@ -1,17 +1,17 @@
 {% extends 'dashboard_frame.html' %}
 
 {% block title %}
-    Create Class | Attendance
+    Update Class | Attendance
 {% endblock %}
 
 {% block content %}
     <div class="bg-dark-subtle p-3">
-        <h5 class="pb-3">Create new class</h5>
-        <form method="post" action="{% url 'dashboard_classes_create' %}">
+        <h5 class="pb-3">Update class</h5>
+        <form method="post" action="{% url 'dashboard_classes_update' pk=class.id %}">
             {% csrf_token %}
             <div class="mb-3">
                 <label for="number" class="form-label">Class Number</label>
-                <input type="text" class="form-control" name="number" id="number">
+                <input type="text" class="form-control" name="number" id="number" value="{{ class.number }}">
             </div>
             
             <div class="mb-3">
@@ -19,7 +19,9 @@
                 <select class="form-select" name="semester" id="semester">
                     <option value="0">-- select semester --</option>
                     {% for semester in semesters %}
-                        <option value="{{ semester.id }}">{{ semester.year }} {{ semester.semester }}</option>
+                        <option {% if class.semester == semester %}selected{% endif %} value="{{ semester.id }}">
+                            {{ semester.year }} {{ semester.semester }}
+                        </option>
                     {% endfor %}
                 </select>
             </div>
@@ -29,7 +31,9 @@
                 <select class="form-select" name="course" id="course">
                     <option value="0">-- select course --</option>
                     {% for course in courses %}
-                        <option value="{{ course.id }}">{{ course.code }} {{ course.name }}</option>
+                        <option {% if class.course == course %}selected{% endif %} value="{{ course.id }}">
+                            {{ course.code }} {{ course.name }}
+                        </option>
                     {% endfor %}
                 </select>
             </div>

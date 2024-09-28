@@ -26,6 +26,7 @@
                 <td>{{ cls.students.count }}</td>
                 <td class="d-flex justify-content-end gap-1">
                     <a class="btn btn-primary" href="{% url 'dashboard_classes_detail' pk=cls.id%}">Detail</a>
+                    <a class="btn btn-primary" href="{% url 'dashboard_classes_update' pk=cls.id%}">Update</a>
                     <a class="btn btn-primary" href="{% url 'dashboard_classes_assign_students' class_id=cls.id %}">Assign students</a>
                     <a class="btn btn-primary" href="{% url 'dashboard_classes_assign_lecture' class_id=cls.id  %}">Assign lecture</a>
                     <a class="btn btn-danger" href="{% url 'dashboard_classes_delete' pk=cls.id %}">Delete</a>

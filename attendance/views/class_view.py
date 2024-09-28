@@ -37,7 +37,29 @@ def class_create(request):
         template_name='class/dashboard_classes_create.html',
         context={
             'semesters': Semester.objects.all(),
-            'lectures': Lecture.objects.all(),
+            'courses': Course.objects.all(),
+            'errors': errors
+        },
+    )
+
+
+def class_update(request, pk):
+    errors = []
+    class_ref = Class.objects.get(id=pk)
+    if request.method == 'POST':
+        form = ClassForm(request.POST, instance=class_ref)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse_lazy('dashboard_classes'))
+        else:
+            errors = format_form_errors(form.errors)
+
+    return render(
+        request=request,
+        template_name='class/dashboard_classes_update.html',
+        context={
+            'class': class_ref,
+            'semesters': Semester.objects.all(),
             'courses': Course.objects.all(),
             'errors': errors
         },
