@@ -29,18 +29,24 @@ def lecture_create(request):
         user_form = UserCreateForm(request.POST)
         lecture_form = LectureCreateForm(request.POST)
         if user_form.is_valid() and lecture_form.is_valid():
-            user: User = user_form.save(commit=False)
-            lecture: Lecture = lecture_form.save(commit=False)
+            form_user: User = user_form.save(commit=False)
+            form_lecture: Lecture = lecture_form.save(commit=False)
 
-            user.password = lecture.date_of_birth.strftime('%Y%m%d')
+            user = User.objects.create_user(
+                username=form_user.username,
+                email=form_user.email,
+                password=form_lecture.date_of_birth.strftime('%Y%m%d'),
+                first_name=form_user.first_name,
+                last_name=form_user.last_name,
+            )
             user.save()
 
             group, _ = Group.objects.get_or_create(name=GROUP_LECTURE)
             group.user_set.add(user)
             group.save()
 
-            lecture.user = user
-            lecture.save()
+            form_lecture.user = user
+            form_lecture.save()
             return redirect('dashboard_lectures')
         else:
             errors = lecture_form.errors

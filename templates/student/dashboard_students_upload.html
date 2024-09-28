@@ -1,0 +1,30 @@
+{% extends 'dashboard_frame.html' %}
+
+{% block title %}
+    Upload Students | Attendance
+{% endblock %}
+
+{% block content %}
+    <div class="bg-dark-subtle p-3">
+        <h5 class="pb-3">Upload Students</h5>
+        <form method="post" enctype="multipart/form-data" action="{% url 'dashboard_students_upload' %}">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                <label for="file" class="form-label">Select students excel</label>
+                <input type="file" class="form-control" name="file" id="file">
+            </div>
+            
+            <ul class="mb-3 text-danger">
+            {% for error in errors %}
+            	<li>{{ error }}</li>
+            {% endfor %}
+            </ul>
+            <br>
+        
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a class="btn btn-secondary" href="{% url 'dashboard_students' %}">Cancel</a>
+        </form>
+        
+    </div>
+{% endblock %}
