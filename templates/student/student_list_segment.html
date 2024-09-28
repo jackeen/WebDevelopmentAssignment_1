@@ -17,8 +17,9 @@
                 <td>{{ student.user.email }}</td>
                 <td></td>
                 <td>
-                    <a class="btn btn-primary" href="{% url 'dashboard_students_detail' pk=student.student_id %}">Detail</a>
-                    <a class="btn btn-danger" href="{% url 'dashboard_students_delete' pk=student.student_id %}">Delete</a>
+                    <a class="btn btn-primary" href="{% url 'dashboard_students_detail' pk=student.id %}">Detail</a>
+                    <a class="btn btn-primary" href="{% url 'dashboard_students_update' pk=student.id %}">Update</a>
+                    <a class="btn btn-danger" href="{% url 'dashboard_students_delete' pk=student.id %}">Delete</a>
                 </td>
             </tr>
         {% endfor %}

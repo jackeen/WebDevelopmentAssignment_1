@@ -5,6 +5,7 @@ from django.views.generic import ListView, DetailView, DeleteView
 
 from attendance.forms import UserUpdateForm, LectureUpdateForm, UserCreateForm, LectureCreateForm
 from attendance.models import Lecture, GROUP_LECTURE
+from attendance.views import format_form_errors
 
 
 class LectureListView(ListView):
@@ -28,14 +29,23 @@ def lecture_create(request):
         user_form = UserCreateForm(request.POST)
         lecture_form = LectureCreateForm(request.POST)
         if user_form.is_valid() and lecture_form.is_valid():
-            user = user_form.save()
-            lecture = lecture_form.save(commit=False)
+            user: User = user_form.save(commit=False)
+            lecture: Lecture = lecture_form.save(commit=False)
+
+            user.password = lecture.date_of_birth.strftime('%Y%m%d')
+            user.save()
+
+            group, _ = Group.objects.get_or_create(name=GROUP_LECTURE)
+            group.user_set.add(user)
+            group.save()
+
             lecture.user = user
             lecture.save()
             return redirect('dashboard_lectures')
         else:
             errors = lecture_form.errors
             errors.update(user_form.errors)
+            errors = format_form_errors(errors)
 
     return render(
         request=request,
@@ -62,6 +72,7 @@ def lecture_update(request, pk):
         else:
             errors = lecture_form.errors
             errors.update(user_form.errors)
+            errors = format_form_errors(errors)
 
     return render(
         request=request,
