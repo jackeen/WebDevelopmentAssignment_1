@@ -29,12 +29,8 @@
             </form>
         </div>
         <hr>
-
-{#        <p>#}
-{#            {% if user.is_authenticated %}#}
-{#                {{ user.is_superuser }}#}
-{#            {% endif %}#}
-{#        </p>#}
+    
+        {% if user.is_authenticated and user.is_superuser %}
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
                 <a class="nav-link text-white {% if 'dashboard_home' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'dashboard_home' %}">Home</a>
@@ -55,6 +51,7 @@
                 <a class="nav-link text-white {% if 'dashboard_classes' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'dashboard_classes' %}">Classes</a>
             </li>
         </ul>
+        {% endif %}
     </div>
 
     <!-- Main Content -->

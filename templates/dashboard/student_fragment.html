@@ -1,4 +1,46 @@
+{% load attendance_filters %}
 <div class="bg-dark-subtle p-3">
     <h5 class="pb-3">Welcome: {{ user }} (student)</h5>
-    
+
+    <p>Your attendance of every class</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Class Number</th>
+                <th scope="col">Course</th>
+                <th scope="col">Semester</th>
+                <th scope="col">Lecture</th>
+                <th scope="col">Present</th>
+                <th scope="col">Absent</th>
+            </tr>
+        </thead>
+        {% if classes.count > 0 %}
+        <tbody>
+            {% for cls in classes %}
+                <tr>
+                    <td>{{ cls.number }}</td>
+                    <td>{{ cls.course.code }} {{ cls.course.name }}</td>
+                    <td>{{ cls.semester.year }} {{ cls.semester.semester }}</td>
+                    <td>
+                        {% if cls.lecture %}
+                            {{ cls.lecture.user.first_name }} {{ cls.lecture.user.last_name }}
+                        {% else %}
+                            Not assigned
+                        {% endif %}
+                    </td>
+                    <td>{{ cls|present_count_by_student:student }}</td>
+                    <td>{{ cls|absent_count_by_student:student }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        {% else %}
+        <tfoot>
+            <tr>
+                <td colspan="6">
+                    There is no class.
+                </td>
+            </tr>
+        </tfoot>
+        {% endif %}
+    </table>
 </div>

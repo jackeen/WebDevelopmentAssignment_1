@@ -3,13 +3,10 @@ Views for home page and dashboard
 """
 from django.shortcuts import render, redirect
 
-from attendance.models import GROUP_LECTURE, GROUP_STUDENT, Class
+from attendance.models import GROUP_LECTURE, GROUP_STUDENT, Class, Student
 
 
 def index(request):
-    #if not request.user.is_authenticated:
-    #    return redirect('login')
-
     return redirect('dashboard_home')
 
 
@@ -27,12 +24,12 @@ def dashboard(request):
     # not???????
     if request.user.groups.filter(name=GROUP_STUDENT).exists():
         classes = Class.objects.filter(students__user=request.user).all()
-        attendances = {}
         return render(
             request=request,
             template_name='dashboard.html',
             context={
-                'attendances': attendances
+                'student': Student.objects.filter(user=request.user).first(),
+                'classes': classes
             }
         )
 
