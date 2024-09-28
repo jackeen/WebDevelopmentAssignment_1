@@ -30,24 +30,26 @@ class SemesterDetailView(DetailView):
         return context
 
 
+def generate_college_days(semester_instance):
+    date_list = []
+    current_date = semester_instance.start_date
+    while current_date <= semester_instance.end_date:
+        date_list.append(current_date)
+        collegeDay, _ = CollegeDay.objects.get_or_create(
+            semester=semester_instance,
+            date=current_date,
+        )
+        collegeDay.save()
+        current_date += timedelta(days=1)
+
+
 def semester_create(request):
-    errors = ""
+    errors = []
     if request.method == 'POST':
         form = SemesterForm(request.POST)
         if form.is_valid():
             semester_instance = form.save()
-
-            # generate college days
-            date_list = []
-            current_date = semester_instance.start_date
-            while current_date <= semester_instance.end_date:
-                date_list.append(current_date)
-                collegeDay, _ = CollegeDay.objects.get_or_create(
-                    semester=semester_instance,
-                    date=current_date,
-                )
-                collegeDay.save()
-                current_date += timedelta(days=1)
+            generate_college_days(semester_instance)
 
             return redirect(reverse_lazy('dashboard_semesters'))
         else:
@@ -57,6 +59,28 @@ def semester_create(request):
         request=request,
         template_name='semesters/dashboard_semesters_create.html',
         context={'errors': errors},
+    )
+
+
+def semester_update(request, pk):
+    errors = []
+    semester = Semester.objects.get(id=pk)
+    if request.method == 'POST':
+        form = SemesterForm(request.POST, instance=semester)
+        if form.is_valid():
+            semester_instance = form.save()
+            generate_college_days(semester_instance)
+            return redirect(reverse_lazy('dashboard_semesters'))
+        else:
+            errors = format_form_errors(form.errors)
+
+    return render(
+        request=request,
+        template_name='semesters/dashboard_semesters_update.html',
+        context={
+            'semester': semester,
+            'errors': errors
+        },
     )
 
 
