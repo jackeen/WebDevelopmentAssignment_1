@@ -3,8 +3,11 @@ from django.contrib.auth.forms import AuthenticationForm
 
 from django.shortcuts import render, redirect
 
+from attendance.views import format_form_errors
+
 
 def login_custom(request):
+    errors = []
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
@@ -14,12 +17,13 @@ def login_custom(request):
             if user is not None:
                 login(request, user)
                 return redirect('dashboard_home')
-    else:
-        form = AuthenticationForm()
+        else:
+            errors = format_form_errors(form.errors)
+
     return render(
         request=request,
         template_name='login.html',
-        context={'form': form}
+        context={'errors': errors}
     )
 
 

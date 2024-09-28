@@ -22,8 +22,11 @@ class AccessLimitMiddleware:
                 if view_name != 'error_403':
                     return redirect('error_403')
 
-        # student
-
+        student = request.user.groups.filter(name=GROUP_STUDENT)
+        if student.count() > 0:
+            if view_name != 'logout' and view_name != 'login' and view_name != 'dashboard_home':
+                if view_name != 'error_403':
+                    return redirect('error_403')
 
         response = self.get_response(request)
         return response

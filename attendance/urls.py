@@ -59,7 +59,6 @@ urlpatterns = [
     path('dashboard/attendance/manage/<int:class_id>',
          views.attendance_manage,
          name='dashboard_attendance_manage'),
-
     path('dashboard/attendance/confirm/<int:class_id>/student/<int:student_id>/<str:status>',
          views.attendance_confirm,
          name='dashboard_attendance_confirm'),
