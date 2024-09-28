@@ -12,6 +12,12 @@ class Student(models.Model):
     date_of_birth = models.DateField()
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
+    def present_count(self):
+        return Attendance.objects.filter(student=self, status='P').count()
+
+    def absent_count(self):
+        return Attendance.objects.filter(student=self, status='A').count()
+
     def __str__(self):
         return f"Student: {self.student_id}, {self.user.first_name} {self.user.last_name}"
 

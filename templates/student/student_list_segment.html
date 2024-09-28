@@ -4,7 +4,8 @@
             <th scope="col">StudentID</th>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
-            <th scope="col">Attendance</th>
+            <th scope="col">Present</th>
+            <th scope="col">Absent</th>
             <th></th>
         </tr>
     </thead>
@@ -15,8 +16,10 @@
                 <td>{{ student.student_id }}</td>
                 <td>{{ student.user.first_name }} {{ student.user.last_name }}</td>
                 <td>{{ student.user.email }}</td>
-                <td></td>
-                <td>
+                <td>{{ student.present_count }}</td>
+                <td>{{ student.absent_count }}</td>
+                <td class="text-end">
+                    <a class="btn btn-secondary" href="mailto:{{ student.user.email }}">Email</a>
                     <a class="btn btn-primary" href="{% url 'dashboard_students_detail' pk=student.id %}">Detail</a>
                     <a class="btn btn-primary" href="{% url 'dashboard_students_update' pk=student.id %}">Update</a>
                     <a class="btn btn-danger" href="{% url 'dashboard_students_delete' pk=student.id %}">Delete</a>
@@ -27,7 +30,7 @@
     {% else %}
     <tfoot>
         <tr>
-            <td colspan="5">
+            <td colspan="6">
                 There is no student.
             </td>
         </tr>
