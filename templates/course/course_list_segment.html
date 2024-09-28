@@ -14,6 +14,7 @@
                 <td>{{ course.name }}</td>
                 <td>
                     <a class="btn btn-primary" href="{% url 'dashboard_courses_detail' pk=course.id %}">Detail</a>
+                    <a class="btn btn-primary" href="{% url 'dashboard_courses_update' pk=course.id %}">Update</a>
                     <a class="btn btn-danger" href="{% url 'dashboard_courses_delete' pk=course.id %}">Delete</a>
                 </td>
             </tr>

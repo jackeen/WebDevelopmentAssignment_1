@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="bg-dark-subtle p-3">
-        <h5 class="pb-3">Create new semester</h5>
+        <h5 class="pb-3">Update semester</h5>
         <form method="post" action="{% url 'dashboard_semesters_update' pk=semester.id %}">
             {% csrf_token %}
             <div class="mb-3">

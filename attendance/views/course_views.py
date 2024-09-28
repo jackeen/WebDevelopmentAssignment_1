@@ -34,7 +34,7 @@ def course_create(request):
         form = CourseForm(request.POST)
         if form.is_valid():
             form.save()
-            redirect(reverse_lazy('dashboard_courses'))
+            return redirect(reverse_lazy('dashboard_courses'))
         else:
             errors = format_form_errors(form.errors)
 
@@ -44,6 +44,26 @@ def course_create(request):
         context={'errors': errors}
     )
 
+
+def course_update(request, pk):
+    errors = []
+    course = Course.objects.get(id=pk)
+    if request.method == 'POST':
+        form = CourseForm(request.POST, instance=course)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse_lazy('dashboard_courses'))
+        else:
+            errors = format_form_errors(form.errors)
+
+    return render(
+        request=request,
+        template_name='course/dashboard_courses_update.html',
+        context={
+            'course': course,
+            'errors': errors
+        }
+    )
 
 class CourseDeleteView(DeleteView):
     model = Course

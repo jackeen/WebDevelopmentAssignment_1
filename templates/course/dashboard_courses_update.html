@@ -1,22 +1,22 @@
 {% extends 'dashboard_frame.html' %}
 
 {% block title %}
-    Create Course | Attendance
+    Update Course | Attendance
 {% endblock %}
 
 {% block content %}
     <div class="bg-dark-subtle p-3">
-        <h5 class="pb-3">Create new course</h5>
-        <form method="post" action="{% url 'dashboard_courses_create' %}">
+        <h5 class="pb-3">Update Course</h5>
+        <form method="post" action="{% url 'dashboard_courses_update' pk=course.id %}">
             {% csrf_token %}
             <div class="mb-3">
                 <label for="code" class="form-label">Course Code</label>
-                <input type="text" class="form-control" name="code" id="code">
+                <input type="text" class="form-control" name="code" id="code" value="{{ course.code }}">
             </div>
             
             <div class="mb-3">
                 <label for="name" class="form-label">Course Name</label>
-                <input type="text" class="form-control" name="name" id="name">
+                <input type="text" class="form-control" name="name" id="name" value="{{ course.name }}">
             </div>
 
             <ul class="mb-3 text-danger">
