@@ -16,7 +16,7 @@
                 <td>{{ semester.semester }}</td>
                 <td>{{ semester.start_date }}</td>
                 <td>{{ semester.end_date }}</td>
-                <td>
+                <td class="text-end">
                     <a class="btn btn-primary" href="{% url 'dashboard_semesters_detail' pk=semester.id%}">Detail</a>
                     <a class="btn btn-primary" href="{% url 'dashboard_semesters_update' pk=semester.id%}">Update</a>
                     <a class="btn btn-danger" href="{% url 'dashboard_semesters_delete' pk=semester.id %}">Delete</a>
