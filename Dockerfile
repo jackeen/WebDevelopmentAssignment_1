@@ -20,8 +20,8 @@ RUN pip install -r requirements.txt
 # Copy the entire project to the working directory
 COPY . /app/
 
-# Create superuser
-RUN source .env
+# Init database and create superuser
+RUN python3 manage.py migrate
 RUN python3 manage.py create_superuser
 
 # Run Gunicorn

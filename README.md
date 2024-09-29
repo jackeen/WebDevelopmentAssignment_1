@@ -66,9 +66,15 @@ python manage.py create_superuser
 python3 manage.py runserver
 ```
 
-## Access 
+## Docker deploy
 
-The admin page is [your domain]/admin
+```shell
+# build local image
+sudo docker build -t [your image tag name for this project] .
+
+# run the image
+sudo run -p 8000:8000 [image tag name]
+```
 
 
 
