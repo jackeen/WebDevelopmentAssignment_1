@@ -72,8 +72,13 @@ python3 manage.py runserver
 # build local image
 sudo docker build -t [your image tag name for this project] .
 
-# run the image
-sudo run -p 8000:8000 [image tag name]
+# Run 
+sudo docker run -p 8000:8000 [image tag name]
+
+# Run the container in detached mode.
+sudo docker run -d --name [container name] -p 8000:8000 [image tag name]
+sudo docker start [container name]
+sudo docker stop [container name]
 ```
 
 
