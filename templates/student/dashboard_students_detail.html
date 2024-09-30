@@ -17,6 +17,9 @@
                 Full Name: {{ student.user.first_name }} {{ student.user.last_name }}
             </li>
             <li class="list-group-item">
+                Date of Birth: {{ student.date_of_birth|date:'Y-m-d' }}
+            </li>
+            <li class="list-group-item">
                 Email: <a href="mailto:{{ student.user.email }}">{{ student.user.email }}</a>
             </li>
             <li class="list-group-item">

@@ -17,6 +17,9 @@
                 Full Name: {{ lecture.user.first_name }} {{ lecture.user.last_name }}
             </li>
             <li class="list-group-item">
+                Date of birth: {{ lecture.date_of_birth|date:'Y-m-d' }}
+            </li>
+            <li class="list-group-item">
                 Email: {{ lecture.user.email }}
             </li>
         </ul>

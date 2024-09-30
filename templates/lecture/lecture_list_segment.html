@@ -3,6 +3,7 @@
         <tr>
             <th scope="col">Staff ID</th>
             <th scope="col">Name</th>
+            <th scope="col">Date of birth</th>
             <th scope="col">Email</th>
             <th></th>
         </tr>
@@ -13,6 +14,7 @@
         	<tr>
                 <td>{{ lecture.staff_id }}</td>
                 <td>{{ lecture.user.first_name }} {{ lecture.user.last_name }}</td>
+                <td>{{ lecture.date_of_birth|date:'Y-m-d' }}</td>
                 <td>{{ lecture.user.email }}</td>
                 <td class="text-end">
                     <a class="btn btn-primary" href="{% url 'dashboard_lectures_detail' pk=lecture.id %}">Detail</a>
@@ -25,7 +27,7 @@
     {% else %}
     <tfoot>
         <tr>
-            <td colspan="4">
+            <td colspan="5">
                 There is no lecture.
             </td>
         </tr>

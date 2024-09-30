@@ -3,6 +3,7 @@
         <tr>
             <th scope="col">StudentID</th>
             <th scope="col">Name</th>
+            <th scope="col">Birth Day</th>
             <th scope="col">Email</th>
             <th scope="col">Present</th>
             <th scope="col">Absent</th>
@@ -15,6 +16,7 @@
         	<tr>
                 <td>{{ student.student_id }}</td>
                 <td>{{ student.user.first_name }} {{ student.user.last_name }}</td>
+                <td>{{ student.date_of_birth|date:'Y-m-d' }}</td>
                 <td>{{ student.user.email }}</td>
                 <td>{{ student.present_count }}</td>
                 <td>{{ student.absent_count }}</td>
@@ -30,7 +32,7 @@
     {% else %}
     <tfoot>
         <tr>
-            <td colspan="6">
+            <td colspan="7">
                 There is no student.
             </td>
         </tr>
