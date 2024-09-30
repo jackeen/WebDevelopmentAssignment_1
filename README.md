@@ -1,6 +1,7 @@
 # Web Development Assignment 1
 
 > This project just for demonstrating how to use Django with templates.
+> The style of this project is built by Bootstrap.
 
 
 ## Demonstrate deploy
@@ -43,7 +44,7 @@ deactivate
 ### Install dependencies
 
 ```shell
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 ### Set environment variables
@@ -86,6 +87,9 @@ python3 manage.py runserver
 ```
 
 ## Docker deploy
+
+> The docker based platforms don't need to do this, they will use Dockerfile to build then deploy.
+> These commands are for local test and IssS server deploy.
 
 ```shell
 # build local image
