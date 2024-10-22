@@ -1,1 +1,0 @@
-web: gunicorn WebDevelopmentAssignment_1.wsgi

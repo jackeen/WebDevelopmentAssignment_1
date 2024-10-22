@@ -4,14 +4,11 @@
 > The style of this project is built by Bootstrap.
 
 
-## Demonstrate deploy
+## Demonstrate deployment for vercel
 
-> https://webdevelopmentassignment-1.onrender.com
+> https://web-development-assignment-1.vercel.app/
 
-Because the limit of this used free account, when it is not access for a while, all persistent data will be cleaned. 
-But when request arrive, the instance will start, just the supper user will be created automatically.
-The **supper user's username and password** included in the document of Task 1. 
-
+The **supper user's username and password** included in the document of Task 1.
 
 ## Prediction
 
@@ -88,23 +85,7 @@ python3 manage.py runserver
 
 ## Docker deploy
 
-> The docker based platforms don't need to do this, they will use Dockerfile to build then deploy.
-> These commands are for local test and IssS server deploy.
-
-```shell
-# build local image
-sudo docker build -t [your image tag name for this project] .
-
-# Run 
-sudo docker run -p 8000:8000 [image tag name]
-
-# Run the container in detached mode.
-sudo docker run -d --name [container name] -p 8000:8000 [image tag name]
-# start container
-sudo docker start [container name]
-# stop container
-sudo docker stop [container name]
-```
+Please check out **docker** branch for this.
 
 
 
