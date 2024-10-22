@@ -3,16 +3,6 @@
 > This project just for demonstrating how to use Django with templates.
 > The style of this project is built by Bootstrap.
 
-
-## Demonstrate deploy
-
-> https://webdevelopmentassignment-1.onrender.com
-
-Because the limit of this used free account, when it is not access for a while, all persistent data will be cleaned. 
-But when request arrive, the instance will start, just the supper user will be created automatically.
-The **supper user's username and password** included in the document of Task 1. 
-
-
 ## Prediction
 
 1. Linux or Mac
